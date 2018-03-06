@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-
 import Chart from './components/chart/Chart';
 
 class App extends Component {
-  char = {
-    column: [{
-      title: '',
+  chart = {
+    columns: [{
+      title: 'AAAAA',
+      cards: []
+    }, {
+      title: 'BBBBB',
       cards: []
     }]
   };
@@ -19,7 +21,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React-Firebase-Kanban Chart</h1>
         </header>
-        <Chart chart/>
+        <Chart chart={this.chart}/>
       </div>
     );
   }

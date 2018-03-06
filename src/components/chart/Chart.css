@@ -1,6 +1,23 @@
+.ChartHeader {
+  padding: 10px 2px
+}
+
+.ChartHeader > h4 {
+  text-align: center
+}
+
+.ChartHeader > button {
+  float: right;
+  padding: 3px 2px;
+  color: black;
+  background-color: coral;
+}
+
 .Chart {
   height: auto;
   width: auto;
   min-height: 200px;
   margin: 10px 20px;
+  display: flex;
+  flex-direction: row;
 }
