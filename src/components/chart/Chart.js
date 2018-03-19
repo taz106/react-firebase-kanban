@@ -3,23 +3,32 @@ import './Chart.css';
 import Column from '../column/Column';
 
 class Chart extends Component {
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      columns: props.chart.columns
+    };
+    this.addOneTaskColumn = this.addOneTaskColumn.bind(this);
+  }
 
-  renderColumns = this.props.chart.columns.map(
-    column => {
-      return (<Column column={column} />)
-    }
-  )
+  addOneTaskColumn(e) {
+    this.setState(
+      prevState => prevState.columns.push({title: 'DDDD', cards: []})
+    );
+  }
 
   render() {
+    let columns = this.state.columns;
     return (
       <div>
         <div className="ChartHeader">
           <h4>Task Board</h4>
-          <button>+</button>
+          <button onClick={this.addOneTaskColumn}>+</button>
         </div>
         <br/>
         <div className="Chart"> 
-          {this.renderColumns}
+          {columns.map((column, index) => <Column key={index} column={column} />)}
         </div>
       </div>
     )

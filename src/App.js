@@ -7,10 +7,22 @@ class App extends Component {
   chart = {
     columns: [{
       title: 'AAAAA',
-      cards: []
+      cards: [{
+        title: "aaaaa",
+        description: "Lorem Ipsum Lorem Ipsum Lorem Ipsum"
+      }, {
+        title: "bbbb",
+        description: "Lorem Ipsum Dolor Sit Emet Lorem Ipsum Dolor Sit Emet Lorem Ipsum Dolor Sit Emet"
+      }]
     }, {
       title: 'BBBBB',
-      cards: []
+      cards: [{
+        title: "aaaaa",
+        description: "Lorem Ipsum Lorem Ipsum Lorem Ipsum"
+      }, {
+        title: "bbbb",
+        description: "Lorem Ipsum Dolor Sit Emet Lorem Ipsum Dolor Sit Emet Lorem Ipsum Dolor Sit Emet"
+      }]
     }]
   };
 
