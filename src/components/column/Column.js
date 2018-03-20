@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './Column.css';
 import Card from '../card/Card';
-import Draggable from 'react-draggable';
 class Column extends Component {
 
   constructor(props) {
@@ -12,54 +11,50 @@ class Column extends Component {
     this.addOneCard = this.addOneCard.bind(this);
     this.handleStart = this.handleStart.bind(this);
     this.handleDrag = this.handleDrag.bind(this);
-    this.handleStop = this.handleStop.bind(this);
+    this.handleDrop = this.handleDrop.bind(this);
   }
 
   addOneCard() {
     this.setState(
       prevState => prevState.column.cards.push({
-        title: 'New Added Card',
-        description: 'Lorem Ipsum Dolor Site Emet Lorem Ipsum Dolor Site Emet Lorem Ipsum Dolor Site Emet'
+        title: '',
+        description: ''
       })
     )
   }
 
-  handleStart(e) {
-    console.log(e);
-    console.log("drag start");
+  handleStart(ev) {
+    let columnId = this.props.id;
+    let cardId = ev.target.id;
+    ev.dataTransfer.setData('text/plain', `${columnId}-${cardId}`);
   }
 
-  handleDrag(e) {
-    console.log(e);
+  handleDrag(ev) {
+    ev.preventDefault();
   }
 
-  handleStop(e) {
-    console.log('drag stop');
-    console.log(e);
+  handleDrop(ev) {
+    let [columnId, cardId] = ev.dataTransfer.getData('text/plain').split('-');
+    ev.dataTransfer.clearData();
+    
+    let destColumnId = ev.currentTarget.id;
+    console.log(columnId, cardId, destColumnId);
+    this.props.onDropCard(columnId, cardId, destColumnId);
   }
 
   render() {
     let column = this.state.column;
     return (
-      <div className="Column"> 
+      <div id={this.props.id} className="Column" onDragOver={this.handleDrag} onDrop={this.handleDrop}> 
         <h3>{column.title}</h3>
         <button onClick={this.addOneCard}>+</button>
         <div>
-          {column.cards.map((card, index) => 
-            <Draggable
-            key={index}
-            allowAnyClick={false}
-            handle=".dragStartEndAres"
-            defaultPosition={{x: 0, y: 0}}
-            position={null}
-            onStart={this.handleStart}
-            onDrag={this.handleDrag}
-            onStop={this.handleStop}>
-              <div className="dragStartEndAres">
-                <Card key={index} card={card}/>
+          {column.cards.map(
+            (card, index) => 
+              <div id={index} key={index} draggable={card.title.length? true:false} onDragStart={this.handleStart}>
+                <Card id={index} card={card} />
               </div>
-            </Draggable>)
-          }
+          )}
         </div>
       </div>
     );

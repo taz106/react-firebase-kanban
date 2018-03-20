@@ -10,11 +10,29 @@ class Chart extends Component {
       columns: props.chart.columns
     };
     this.addOneTaskColumn = this.addOneTaskColumn.bind(this);
+    this.addCard = this.addCard.bind(this);
+  }
+
+  componentWillUpdate() {
+    console.log(this.state.columns);
   }
 
   addOneTaskColumn(e) {
     this.setState(
       prevState => prevState.columns.push({title: 'DDDD', cards: []})
+    );
+  }
+
+  addCard(sourceColumnId, sourceCardId, destColumnId) {
+    let columns = this.state.columns;
+    let sourceCard = columns[sourceColumnId].cards[sourceCardId];
+    
+    this.setState(
+      () => {
+        columns[destColumnId].cards.push(sourceCard);
+        columns[sourceColumnId].cards.splice(sourceCardId, 1);
+        return columns;
+      }
     );
   }
 
@@ -28,7 +46,15 @@ class Chart extends Component {
         </div>
         <br/>
         <div className="Chart"> 
-          {columns.map((column, index) => <Column key={index} column={column} />)}
+          {columns.map(
+            (column, index) => 
+              <Column
+                id={index} 
+                className="Chart"
+                key={index} 
+                column={column}
+                onDropCard={this.addCard} />
+          )}
         </div>
       </div>
     )
