@@ -13,9 +13,6 @@ class App extends Component {
       }, {
         title: "bbbb",
         description: "Lorem Ipsum Dolor Sit Emet Lorem Ipsum Dolor Sit Emet Lorem Ipsum Dolor Sit Emet"
-      }, {
-        title: "cccc",
-        description: "Lorem Ipsum Dolor Sit Emet Lorem Ipsum Dolor Sit Emet Lorem Ipsum Dolor Sit Emet"
       }]
     }, {
       title: 'BBBBB',
@@ -24,9 +21,6 @@ class App extends Component {
         description: "Lorem Ipsum Lorem Ipsum Lorem Ipsum"
       }, {
         title: "bbbb",
-        description: "Lorem Ipsum Dolor Sit Emet Lorem Ipsum Dolor Sit Emet Lorem Ipsum Dolor Sit Emet"
-      }, {
-        title: "cccc",
         description: "Lorem Ipsum Dolor Sit Emet Lorem Ipsum Dolor Sit Emet Lorem Ipsum Dolor Sit Emet"
       }]
     }]

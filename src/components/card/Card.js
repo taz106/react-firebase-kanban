@@ -41,7 +41,16 @@ class Card extends Component {
   
   render() {
     let card = this.state.card;
-    return (card.title.length) ? this.cardTemplate(card) : this.newCardTemplate();
+    // return (card.title.length) ? this.cardTemplate(card) : this.newCardTemplate();
+    return (
+      <div id={this.props.id} className="Card">
+        <h3>{card.title}</h3>
+        <div>{card.description}</div>
+        <div className="action-btns">
+          <button className="delete">Delete</button>
+        </div>
+      </div>
+    )
   }
 }
 

@@ -14,11 +14,11 @@ class Column extends Component {
     this.handleDrop = this.handleDrop.bind(this);
   }
 
-  addOneCard() {
+  addOneCard(ev) {
     this.setState(
       prevState => prevState.column.cards.push({
-        title: '',
-        description: ''
+        title: 'New Card',
+        description: 'New Card Description'
       })
     )
   }
@@ -38,7 +38,6 @@ class Column extends Component {
     ev.dataTransfer.clearData();
     
     let destColumnId = ev.currentTarget.id;
-    console.log(columnId, cardId, destColumnId);
     this.props.onDropCard(columnId, cardId, destColumnId);
   }
 

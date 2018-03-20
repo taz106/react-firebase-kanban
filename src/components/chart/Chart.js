@@ -24,20 +24,19 @@ class Chart extends Component {
   }
 
   addCard(sourceColumnId, sourceCardId, destColumnId) {
+    console.log(sourceColumnId, sourceCardId, destColumnId);
     let columns = this.state.columns;
     let sourceCard = columns[sourceColumnId].cards[sourceCardId];
     
-    this.setState(
-      () => {
-        columns[destColumnId].cards.push(sourceCard);
-        columns[sourceColumnId].cards.splice(sourceCardId, 1);
-        return columns;
-      }
-    );
+    columns[destColumnId].cards = columns[destColumnId].cards.concat(sourceCard);
+    columns[sourceColumnId].cards.splice(sourceCardId, 1);
+    // console.log(columns);
+    this.setState({columns: columns});
   }
 
   render() {
     let columns = this.state.columns;
+    console.log(columns);
     return (
       <div>
         <div className="ChartHeader">
