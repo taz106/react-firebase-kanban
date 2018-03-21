@@ -13,9 +13,9 @@ class Chart extends Component {
     this.addCard = this.addCard.bind(this);
   }
 
-  componentWillUpdate() {
-    console.log(this.state.columns);
-  }
+  // componentWillUpdate() {
+  //   console.log(this.state.columns);
+  // }
 
   addOneTaskColumn(e) {
     this.setState(
@@ -28,15 +28,19 @@ class Chart extends Component {
     let columns = this.state.columns;
     let sourceCard = columns[sourceColumnId].cards[sourceCardId];
     
-    columns[destColumnId].cards = columns[destColumnId].cards.concat(sourceCard);
     columns[sourceColumnId].cards.splice(sourceCardId, 1);
-    // console.log(columns);
+    columns[destColumnId].cards = columns[destColumnId].cards.concat(sourceCard);
+    console.log(columns[sourceColumnId].cards);
     this.setState({columns: columns});
+  }
+
+  saveCard(id, card) {
+    // this.state.columns[id].cards[-1] = card;
   }
 
   render() {
     let columns = this.state.columns;
-    console.log(columns);
+    // console.log(columns);
     return (
       <div>
         <div className="ChartHeader">
@@ -45,14 +49,13 @@ class Chart extends Component {
         </div>
         <br/>
         <div className="Chart"> 
-          {columns.map(
-            (column, index) => 
-              <Column
-                id={index} 
-                className="Chart"
-                key={index} 
-                column={column}
-                onDropCard={this.addCard} />
+          {columns.map((column, index) => 
+            <Column
+              id={index} 
+              className="Chart"
+              key={index} 
+              column={column}
+              onDropCard={this.addCard} />
           )}
         </div>
       </div>

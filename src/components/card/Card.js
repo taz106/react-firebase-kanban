@@ -5,23 +5,35 @@ class Card extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      card: this.props.card
-    }
-    
     this.newCardTemplate = this.newCardTemplate.bind(this);
     this.cardTemplate = this.cardTemplate.bind(this);
+    this.saveCard = this.saveCard.bind(this);
+    this.cancelCard = this.cancelCard.bind(this);
+    this.deleteCard = this.deleteCard.bind(this);
+  }
+
+  saveCard(ev) {
+    console.log(ev)
+    this.props.onSaveCard()
+  }
+
+  cancelCard() {
+
+  }
+
+  deleteCard() {
+
   }
 
   newCardTemplate() {
     return (
       <div id={this.props.id} className="Card">
-        <input type="text" />
+        <input id="title" type="text" />
         <br />
-        <textarea></textarea>
+        <textarea id="desc"></textarea>
         <div className="action-btns">
-          <button className="save">Save</button>
-          <button className="cancel">Cancel</button>
+          <button className="save" onClick={this.saveCard}>Save</button>
+          <button className="cancel" onClick={this.cancelCard}>Cancel</button>
         </div>
       </div>
     )
@@ -33,24 +45,15 @@ class Card extends Component {
         <h3>{card.title}</h3>
         <div>{card.description}</div>
         <div className="action-btns">
-          <button className="delete">Delete</button>
+          <button className="delete" onClick={this.deleteCard}>Delete</button>
         </div>
       </div>
     )
   }
   
   render() {
-    let card = this.state.card;
-    // return (card.title.length) ? this.cardTemplate(card) : this.newCardTemplate();
-    return (
-      <div id={this.props.id} className="Card">
-        <h3>{card.title}</h3>
-        <div>{card.description}</div>
-        <div className="action-btns">
-          <button className="delete">Delete</button>
-        </div>
-      </div>
-    )
+    let card = this.props.card;
+    return (card.title.length)? this.cardTemplate(card) : this.newCardTemplate();
   }
 }
 

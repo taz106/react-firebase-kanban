@@ -9,6 +9,7 @@ class Column extends Component {
       column: props.column
     };
     this.addOneCard = this.addOneCard.bind(this);
+    this.saveOneCard = this.saveOneCard.bind(this);
     this.handleStart = this.handleStart.bind(this);
     this.handleDrag = this.handleDrag.bind(this);
     this.handleDrop = this.handleDrop.bind(this);
@@ -17,10 +18,15 @@ class Column extends Component {
   addOneCard(ev) {
     this.setState(
       prevState => prevState.column.cards.push({
-        title: 'New Card',
-        description: 'New Card Description'
+        title: '',
+        description: ''
       })
     )
+  }
+
+  saveOneCard(ev) {
+    console.log('saving');
+    
   }
 
   handleStart(ev) {
@@ -48,11 +54,13 @@ class Column extends Component {
         <h3>{column.title}</h3>
         <button onClick={this.addOneCard}>+</button>
         <div>
-          {column.cards.map(
-            (card, index) => 
-              <div id={index} key={index} draggable={card.title.length? true:false} onDragStart={this.handleStart}>
-                <Card id={index} card={card} />
-              </div>
+          {column.cards.map((card, index) =>
+            <div id={index} key={index} draggable="true" onDragStart={this.handleStart}>
+              <Card 
+                id={index} 
+                card={card}
+                onSaveCard={this.saveOneCard} />
+            </div>
           )}
         </div>
       </div>
